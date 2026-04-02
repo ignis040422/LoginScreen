@@ -157,7 +157,6 @@
             Controls.Add(lblAppName);
             Name = "LoginScreen";
             Text = "Login Screen";
-            Load += LoginScreen_Load;
             ResumeLayout(false);
             PerformLayout();
         }
