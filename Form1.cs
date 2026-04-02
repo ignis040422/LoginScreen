@@ -8,7 +8,7 @@ namespace LoginScreen
     public partial class LoginScreen : Form
     {
         string correctId = "23017031";
-        string correctPw = "0000";
+        string correctPw = "1234";
 
         int failCount = 0;
         int maxFail = 3;
