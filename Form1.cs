@@ -7,7 +7,7 @@ namespace LoginScreen
     public partial class Form1 : Form
     {
         string correctId = "23017031";
-        string correctPw = "0724";
+        string correctPw = "0000";
 
         public Form1()
         {
