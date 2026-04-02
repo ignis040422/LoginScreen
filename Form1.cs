@@ -8,8 +8,8 @@ namespace LoginScreen
     public partial class LoginScreen : Form
     {
         // 정답 계정
-        string myID = "23017031";
-        string myPW = "1234";
+        string myID = "admin";
+        string myPW = "superman";
 
         // 로그인 실패 제한 관련 변수
         int failCount = 0;

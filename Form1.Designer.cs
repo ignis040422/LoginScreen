@@ -75,7 +75,7 @@
             // 
             btnLogin.BackColor = SystemColors.ControlLight;
             btnLogin.Font = new Font("맑은 고딕", 12F);
-            btnLogin.Location = new Point(60, 261);
+            btnLogin.Location = new Point(198, 261);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(107, 28);
             btnLogin.TabIndex = 1;
@@ -122,7 +122,7 @@
             // 
             btnClear.BackColor = SystemColors.ControlLight;
             btnClear.Font = new Font("맑은 고딕", 11F);
-            btnClear.Location = new Point(198, 261);
+            btnClear.Location = new Point(73, 261);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(107, 28);
             btnClear.TabIndex = 7;
