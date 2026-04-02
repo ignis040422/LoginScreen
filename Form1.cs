@@ -9,7 +9,7 @@ namespace LoginScreen
     {
         // 정답 계정
         string myID = "admin";
-        string myPW = "superman";
+        string myPW = "1234";
 
         // 로그인 실패 제한 관련 변수
         int failCount = 0;

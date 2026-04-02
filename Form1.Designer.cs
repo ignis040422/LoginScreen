@@ -46,7 +46,7 @@
             lblAppName.Location = new Point(131, 19);
             lblAppName.Name = "lblAppName";
             lblAppName.Size = new Size(107, 45);
-            lblAppName.TabIndex = 0;
+            lblAppName.TabIndex = 8;
             lblAppName.Text = "Login";
             // 
             // txtID
@@ -54,7 +54,7 @@
             txtID.Location = new Point(106, 114);
             txtID.Name = "txtID";
             txtID.Size = new Size(199, 23);
-            txtID.TabIndex = 2;
+            txtID.TabIndex = 0;
             txtID.TextChanged += txtID_TextChanged;
             txtID.Enter += txtID_Enter;
             txtID.KeyDown += txtID_KeyDown;
@@ -65,7 +65,7 @@
             txtPW.Location = new Point(106, 164);
             txtPW.Name = "txtPW";
             txtPW.Size = new Size(199, 23);
-            txtPW.TabIndex = 3;
+            txtPW.TabIndex = 1;
             txtPW.TextChanged += txtPW_TextChanged;
             txtPW.Enter += txtPW_Enter;
             txtPW.KeyDown += txtPW_KeyDown;
@@ -78,7 +78,7 @@
             btnLogin.Location = new Point(198, 261);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(107, 28);
-            btnLogin.TabIndex = 1;
+            btnLogin.TabIndex = 4;
             btnLogin.Text = "로그인";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
@@ -90,7 +90,7 @@
             lblErrorMsg.Location = new Point(106, 224);
             lblErrorMsg.Name = "lblErrorMsg";
             lblErrorMsg.Size = new Size(199, 15);
-            lblErrorMsg.TabIndex = 4;
+            lblErrorMsg.TabIndex = 5;
             lblErrorMsg.Text = "아이디 또는 비밀번호가 틀렸습니다";
             lblErrorMsg.Visible = false;
             // 
@@ -102,7 +102,7 @@
             idbox.Name = "idbox";
             idbox.ReadOnly = true;
             idbox.Size = new Size(50, 16);
-            idbox.TabIndex = 5;
+            idbox.TabIndex = 7;
             idbox.TabStop = false;
             idbox.Text = "아이디:";
             // 
@@ -125,7 +125,7 @@
             btnClear.Location = new Point(73, 261);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(107, 28);
-            btnClear.TabIndex = 7;
+            btnClear.TabIndex = 3;
             btnClear.Text = "전체 지우기";
             btnClear.UseVisualStyleBackColor = false;
             btnClear.Click += btnClear_Click;
@@ -136,7 +136,7 @@
             chkShowPw.Location = new Point(106, 193);
             chkShowPw.Name = "chkShowPw";
             chkShowPw.Size = new Size(102, 19);
-            chkShowPw.TabIndex = 8;
+            chkShowPw.TabIndex = 2;
             chkShowPw.Text = "비밀번호 보기";
             chkShowPw.UseVisualStyleBackColor = true;
             chkShowPw.CheckedChanged += chkShowPw_CheckedChanged;
