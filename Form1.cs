@@ -68,7 +68,7 @@ namespace LoginScreen
             }
         }
 
-        // 🔥 로그인 버튼 클릭 (여기 핵심)
+        // 로그인 버튼 클릭
         private void Login_Click(object sender, EventArgs e)
         {
             string id = txtId.Text;
@@ -76,12 +76,23 @@ namespace LoginScreen
 
             if (id == correctId && pw == correctPw)
             {
+                lblError.Visible = false;
                 MessageBox.Show("로그인 성공!", "성공");
             }
             else
             {
-                MessageBox.Show("아이디 또는 비밀번호가 틀렸습니다.", "실패");
+                lblError.Visible = true;
             }
+        }
+
+        private void txtId_TextChanged(object sender, EventArgs e)
+        {
+            lblError.Visible = false;
+        }
+
+        private void txtPw_TextChanged(object sender, EventArgs e)
+        {
+            lblError.Visible = false;
         }
     }
 }
