@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LoginScreen
@@ -8,6 +9,11 @@ namespace LoginScreen
     {
         string correctId = "23017031";
         string correctPw = "0000";
+
+        int failCount = 0;
+        int maxFail = 3;
+        bool isLocked = false;
+        DateTime lockUntil;
 
         public LoginScreen()
         {
@@ -18,69 +24,84 @@ namespace LoginScreen
         // Placeholder 초기 설정
         private void InitPlaceholder()
         {
-            txtId.Text = "아이디";
-            txtId.ForeColor = Color.Gray;
+            txtID.Text = "아이디";
+            txtID.ForeColor = Color.Gray;
 
-            txtPw.Text = "비밀번호";
-            txtPw.ForeColor = Color.Gray;
-            txtPw.UseSystemPasswordChar = false;
+            txtPW.Text = "비밀번호";
+            txtPW.ForeColor = Color.Gray;
+            txtPW.UseSystemPasswordChar = false;
 
             lblError.Visible = false;
         }
 
         // 아이디 클릭
-        private void txtId_Enter(object sender, EventArgs e)
+        private void txtID_Enter(object sender, EventArgs e)
         {
-            if (txtId.Text == "아이디")
+            if (txtID.Text == "아이디")
             {
-                txtId.Text = "";
-                txtId.ForeColor = Color.Black;
+                txtID.Text = "";
+                txtID.ForeColor = Color.Black;
             }
         }
 
         // 아이디 벗어남
-        private void txtId_Leave(object sender, EventArgs e)
+        private void txtID_Leave(object sender, EventArgs e)
         {
-            if (txtId.Text == "")
+            if (txtID.Text == "")
             {
-                txtId.Text = "아이디";
-                txtId.ForeColor = Color.Gray;
+                txtID.Text = "아이디";
+                txtID.ForeColor = Color.Gray;
             }
         }
 
         // 비밀번호 클릭
-        private void txtPw_Enter(object sender, EventArgs e)
+        private void txtPW_Enter(object sender, EventArgs e)
         {
-            if (txtPw.Text == "비밀번호")
+            if (txtPW.Text == "비밀번호")
             {
-                txtPw.Text = "";
-                txtPw.ForeColor = Color.Black;
+                txtPW.Text = "";
+                txtPW.ForeColor = Color.Black;
 
                 if (!chkShowPw.Checked)
                 {
-                    txtPw.UseSystemPasswordChar = true;
+                    txtPW.UseSystemPasswordChar = true;
                 }
             }
         }
 
         // 비밀번호 벗어남
-        private void txtPw_Leave(object sender, EventArgs e)
+        private void txtPW_Leave(object sender, EventArgs e)
         {
-            if (txtPw.Text == "")
+            if (txtPW.Text == "")
             {
-                txtPw.UseSystemPasswordChar = false;
-                txtPw.Text = "비밀번호";
-                txtPw.ForeColor = Color.Gray;
+                txtPW.UseSystemPasswordChar = false;
+                txtPW.Text = "비밀번호";
+                txtPW.ForeColor = Color.Gray;
             }
         }
 
         // 로그인 버튼 클릭
-        private void Login_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            string id = txtId.Text;
-            string pw = txtPw.Text;
+            if (isLocked)
+            {
+                if (DateTime.Now < lockUntil)
+                {
+                    int remain = (int)(lockUntil - DateTime.Now).TotalSeconds;
+                    lblError.Text = $"로그인 제한 상태입니다. {remain}초 후 다시 시도하세요.";
+                    lblError.Visible = true;
+                    return;
+                }
+                else
+                {
+                    isLocked = false;
+                    failCount = 0;
+                }
+            }
 
-            // 입력 안 했을 때
+            string id = txtID.Text;
+            string pw = txtPW.Text;
+
             if (id == "아이디" || pw == "비밀번호" || id == "" || pw == "")
             {
                 lblError.Text = "아이디와 비밀번호를 입력하세요.";
@@ -88,47 +109,67 @@ namespace LoginScreen
                 return;
             }
 
+            if (!Regex.IsMatch(id, "^[a-zA-Z0-9]+$"))
+            {
+                lblError.Text = "아이디는 영문과 숫자만 입력 가능합니다.";
+                lblError.Visible = true;
+                return;
+            }
+
+            if (!Regex.IsMatch(pw, @"^(?=.*\d).{4,}$"))
+            {
+                lblError.Text = "비밀번호는 숫자를 포함하고 4자 이상이어야 합니다.";
+                lblError.Visible = true;
+                return;
+            }
+
             if (id == correctId && pw == correctPw)
             {
                 lblError.Visible = false;
+                failCount = 0;
                 MessageBox.Show("로그인 성공!", "성공");
             }
             else
             {
-                // 과제1 커밋용으로 쓸 때는 아래 2줄 대신 MessageBox 사용
-                // MessageBox.Show("로그인 실패!", "실패");
-
-                lblError.Text = "아이디 또는 비밀번호가 틀렸습니다.";
+                failCount++;
+                lblError.Text = $"아이디 또는 비밀번호가 틀렸습니다. ({failCount}/{maxFail})";
                 lblError.Visible = true;
+
+                if (failCount >= maxFail)
+                {
+                    isLocked = true;
+                    lockUntil = DateTime.Now.AddSeconds(10);
+                    lblError.Text = "로그인 3회 실패로 10초간 제한됩니다.";
+                }
             }
         }
 
         // 에러 메시지 숨기기
-        private void txtId_TextChanged(object sender, EventArgs e)
+        private void txtID_TextChanged(object sender, EventArgs e)
         {
             lblError.Visible = false;
         }
 
-        private void txtPw_TextChanged(object sender, EventArgs e)
+        private void txtPW_TextChanged(object sender, EventArgs e)
         {
             lblError.Visible = false;
         }
 
         // Enter 키로 포커스 이동 / 로그인
-        private void txtId_KeyDown(object sender, KeyEventArgs e)
+        private void txtID_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                txtPw.Focus();
+                txtPW.Focus();
                 e.SuppressKeyPress = true;
             }
         }
 
-        private void txtPw_KeyDown(object sender, KeyEventArgs e)
+        private void txtPW_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Login_Click(null, null);
+                btnLogin_Click(null, null);
                 e.SuppressKeyPress = true;
             }
         }
@@ -136,23 +177,23 @@ namespace LoginScreen
         // 전체 지우기 버튼
         private void btnClear_Click(object sender, EventArgs e)
         {
-            txtId.Text = "";
-            txtPw.Text = "";
+            txtID.Text = "";
+            txtPW.Text = "";
             lblError.Visible = false;
             chkShowPw.Checked = false;
-            txtId.Focus();
+            txtID.Focus();
         }
 
         // 비밀번호 보기 체크박스
         private void chkShowPw_CheckedChanged(object sender, EventArgs e)
         {
-            if (txtPw.Text == "비밀번호")
+            if (txtPW.Text == "비밀번호")
             {
-                txtPw.UseSystemPasswordChar = false;
+                txtPW.UseSystemPasswordChar = false;
             }
             else
             {
-                txtPw.UseSystemPasswordChar = !chkShowPw.Checked;
+                txtPW.UseSystemPasswordChar = !chkShowPw.Checked;
             }
         }
 

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Login = new Label();
-            txtId = new TextBox();
-            txtPw = new TextBox();
+            lblAppName = new Label();
+            txtID = new TextBox();
+            txtPW = new TextBox();
             btnLogin = new Button();
             lblError = new Label();
             idbox = new TextBox();
@@ -39,38 +39,37 @@
             chkShowPw = new CheckBox();
             SuspendLayout();
             // 
-            // Login
+            // lblAppName
             // 
-            Login.AutoSize = true;
-            Login.Font = new Font("맑은 고딕", 24.75F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            Login.Location = new Point(131, 19);
-            Login.Name = "Login";
-            Login.Size = new Size(107, 45);
-            Login.TabIndex = 0;
-            Login.Text = "Login";
-            Login.Click += Login_Click;
+            lblAppName.AutoSize = true;
+            lblAppName.Font = new Font("맑은 고딕", 24.75F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblAppName.Location = new Point(131, 19);
+            lblAppName.Name = "lblAppName";
+            lblAppName.Size = new Size(107, 45);
+            lblAppName.TabIndex = 0;
+            lblAppName.Text = "Login";
             // 
-            // txtId
+            // txtID
             // 
-            txtId.Location = new Point(106, 114);
-            txtId.Name = "txtId";
-            txtId.Size = new Size(199, 23);
-            txtId.TabIndex = 1;
-            txtId.TextChanged += txtId_TextChanged;
-            txtId.Enter += txtId_Enter;
-            txtId.KeyDown += txtId_KeyDown;
-            txtId.Leave += txtId_Leave;
+            txtID.Location = new Point(106, 114);
+            txtID.Name = "txtID";
+            txtID.Size = new Size(199, 23);
+            txtID.TabIndex = 1;
+            txtID.TextChanged += txtID_TextChanged;
+            txtID.Enter += txtID_Enter;
+            txtID.KeyDown += txtID_KeyDown;
+            txtID.Leave += txtID_Leave;
             // 
-            // txtPw
+            // txtPW
             // 
-            txtPw.Location = new Point(106, 164);
-            txtPw.Name = "txtPw";
-            txtPw.Size = new Size(199, 23);
-            txtPw.TabIndex = 2;
-            txtPw.TextChanged += txtPw_TextChanged;
-            txtPw.Enter += txtPw_Enter;
-            txtPw.KeyDown += txtPw_KeyDown;
-            txtPw.Leave += txtPw_Leave;
+            txtPW.Location = new Point(106, 164);
+            txtPW.Name = "txtPW";
+            txtPW.Size = new Size(199, 23);
+            txtPW.TabIndex = 2;
+            txtPW.TextChanged += txtPW_TextChanged;
+            txtPW.Enter += txtPW_Enter;
+            txtPW.KeyDown += txtPW_KeyDown;
+            txtPW.Leave += txtPW_Leave;
             // 
             // btnLogin
             // 
@@ -82,7 +81,7 @@
             btnLogin.TabIndex = 3;
             btnLogin.Text = "로그인";
             btnLogin.UseVisualStyleBackColor = false;
-            btnLogin.Click += Login_Click;
+            btnLogin.Click += btnLogin_Click;
             // 
             // lblError
             // 
@@ -101,8 +100,10 @@
             idbox.BorderStyle = BorderStyle.None;
             idbox.Location = new Point(50, 117);
             idbox.Name = "idbox";
+            idbox.ReadOnly = true;
             idbox.Size = new Size(50, 16);
             idbox.TabIndex = 5;
+            idbox.TabStop = false;
             idbox.Text = "아이디:";
             // 
             // pwbox
@@ -111,8 +112,10 @@
             pwbox.BorderStyle = BorderStyle.None;
             pwbox.Location = new Point(50, 167);
             pwbox.Name = "pwbox";
+            pwbox.ReadOnly = true;
             pwbox.Size = new Size(57, 16);
             pwbox.TabIndex = 6;
+            pwbox.TabStop = false;
             pwbox.Text = "비밀번호:";
             // 
             // btnClear
@@ -149,9 +152,9 @@
             Controls.Add(idbox);
             Controls.Add(lblError);
             Controls.Add(btnLogin);
-            Controls.Add(txtPw);
-            Controls.Add(txtId);
-            Controls.Add(Login);
+            Controls.Add(txtPW);
+            Controls.Add(txtID);
+            Controls.Add(lblAppName);
             Name = "LoginScreen";
             Text = "Login Screen";
             Load += LoginScreen_Load;
@@ -161,9 +164,9 @@
 
         #endregion
 
-        private Label Login;
-        private TextBox txtId;
-        private TextBox txtPw;
+        private Label lblAppName;
+        private TextBox txtID;
+        private TextBox txtPW;
         private Button btnLogin;
         private Label lblError;
         private TextBox idbox;
